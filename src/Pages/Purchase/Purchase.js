@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import auth from "./../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./../Shared/Loading/Loading";
 import { toast } from "react-toastify";
+import { useQuery } from "react-query";
 
 const Purchase = () => {
   const { _id } = useParams();
-  const [part, setPart] = useState({});
   const [user, loading] = useAuthState(auth);
 
-  useEffect(() => {
-    const url = `http://localhost:5000/parts/${_id}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setPart(data));
-  }, [_id]);
-  const handleAddToCart = (e) => {
+  const {
+    isLoading,
+    data: part,
+    refetch,
+  } = useQuery(["available"], () =>
+    fetch(`http://localhost:5000/parts/${_id}`).then((res) => res.json())
+  );
+
+  const handleAddToCart = async (e) => {
     e.preventDefault();
     const number = e.target.number.value;
     const address = e.target.address.value;
@@ -28,33 +31,38 @@ const Purchase = () => {
       number,
       orderQuantity,
       address,
-      price: part.price
-    } 
-    fetch('http://localhost:5000/ordered', {
-      method: 'POST',
-      headers:{
-        'content-type': 'application/json'
+      price: part.price,
+    };
+    fetch("http://localhost:5000/ordered", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
       },
-      body: JSON.stringify(ordered)
+      body: JSON.stringify(ordered),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      if(data.acknowledged){
-        toast.success("Added to cart, Successfully")
-        e.target.reset()
-      }
-      else{
-        toast.error("Added to cart, Failed")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
+          const url = `http://localhost:5000/parts/${_id}`;
+          const { data } = axios.put(url, { deliveredQuantity });
 
-      }
-    })
-    
+          console.log(data);
+          toast.success("Added to cart, Successfully");
+          e.target.reset();
+          refetch();
+        } else {
+          toast.error("Added to cart, Failed");
+        }
+      });
   };
-  if (loading) {
+
+  if (loading || isLoading) {
     return <Loading />;
   }
   return (
-    <div className='lg:flex justify-center w-full mx-auto'>
+    <div className="lg:flex justify-center w-full mx-auto">
       <div className="card my-5 w-96 bg-base-100 shadow-xl">
         <figure>
           <img src={part.img} alt="tools" />
@@ -80,7 +88,7 @@ const Purchase = () => {
             value={part.productName}
             className="input input-bordered  w-full max-w-md"
           />
-         
+
           <input
             type="text"
             name="name"
