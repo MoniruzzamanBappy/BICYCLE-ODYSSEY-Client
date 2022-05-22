@@ -5,6 +5,10 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/SignUp/Signup";
 import Footer from "./Pages/Shared/Footer/Footer";
+import RequireAuth from "./Pages/Shared/RequireAuth/RequireAuth";
+import Purchase from "./Pages/Purchase/Purchase";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -14,10 +18,19 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route
+            path="/purchase/:_id"
+            element={
+              <RequireAuth>
+                <Purchase></Purchase>
+              </RequireAuth>
+            }
+          ></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
       </div>
+      <ToastContainer />
       <Footer />
     </div>
   );

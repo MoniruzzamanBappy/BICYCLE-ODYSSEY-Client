@@ -24,10 +24,10 @@ const Login = () => {
     await signInWithEmailAndPassword(email, pass);
   };
   useEffect(() => {
-    if (token) {
+    if (user || user1) {
       navigate(from, { replace: true });
     }
-  }, [from, navigate, token]);
+  }, [from, navigate, token, user, user1]);
   if (error || error1) {
     loginError = (
       <p className="text-red-500">
