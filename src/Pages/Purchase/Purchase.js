@@ -41,6 +41,7 @@ const Purchase = () => {
     .then(data=>{
       if(data.acknowledged){
         toast.success("Added to cart, Successfully")
+        e.target.reset()
       }
       else{
         toast.error("Added to cart, Failed")
