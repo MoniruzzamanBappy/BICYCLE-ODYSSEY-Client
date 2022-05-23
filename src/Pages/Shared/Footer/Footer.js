@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer-center bg-slate-300">
+    <footer className="footer-center">
       <div className="footer p-10">
         <div>
           <span className="footer-title">Services</span>
@@ -48,7 +48,7 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-      <div className="pb-2 mt-12">
+      <div className="pb-2">
         <p>
           Copyright © {new Date().getFullYear()} - All right reserved by BICYCLE ODYSSEY
         </p>
