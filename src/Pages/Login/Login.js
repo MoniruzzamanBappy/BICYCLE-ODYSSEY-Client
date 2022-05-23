@@ -24,7 +24,7 @@ const Login = () => {
     await signInWithEmailAndPassword(email, pass);
   };
   useEffect(() => {
-    if (user || user1) {
+    if (token) {
       navigate(from, { replace: true });
     }
   }, [from, navigate, token, user, user1]);
