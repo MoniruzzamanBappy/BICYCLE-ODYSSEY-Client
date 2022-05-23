@@ -9,6 +9,7 @@ import Purchase from "./Pages/Purchase/Purchase";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import AllParts from "./Pages/AllParts/AllParts";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/parts" element={<AllParts />}></Route>
           <Route
             path="/purchase/:_id"
             element={
