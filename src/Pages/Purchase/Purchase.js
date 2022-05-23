@@ -44,14 +44,21 @@ const Purchase = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
-          const url = `http://localhost:5000/parts/${_id}`;
-          const { data } = axios.put(url, { deliveredQuantity });
+          if (
+            orderQuantity < parseInt(part.quantity) &&
+            orderQuantity >= parseInt(part.order)
+          ) {
+            const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
+            const url = `http://localhost:5000/parts/${_id}`;
+            const { data } = axios.put(url, { deliveredQuantity });
 
-          console.log(data);
-          toast.success("Added to cart, Successfully");
-          e.target.reset();
-          refetch();
+            console.log(data);
+            toast.success("Added to cart, Successfully");
+            e.target.reset();
+            refetch();
+          } else {
+            toast.error("Order Quantity less than minimum order");
+          }
         } else {
           toast.error("Added to cart, Failed");
         }
