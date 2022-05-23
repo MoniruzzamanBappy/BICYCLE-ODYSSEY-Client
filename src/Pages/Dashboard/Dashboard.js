@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading/Loading";
-import useAdmin from './../../hooks/useAdmin';
+import useAdmin from "./../../hooks/useAdmin";
 
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -19,45 +19,56 @@ const Dashboard = () => {
         <Outlet />
       </div>
       <div className="drawer-side">
-        <label
-          htmlFor="dashboard-sidebar"
-          className="drawer-overlay"
-        ></label>
+        <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-48 bg-accent text-base-content">
           {/* <!-- Sidebar content here --> */}
-          <li>
-            <Link to="/dashboard" className="link link-hover">
-              My Orders
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard/myreview" className="link link-hover">
-              Add Reviews
-            </Link>
-          </li>
+
+          {!admin && (
             <li>
-              <Link to="/dashboard/admins" className="link link-hover">
-                My Profile
+              <Link to="/dashboard" className="link link-hover">
+                My Orders
               </Link>
             </li>
+          )}
+
+          {!admin && (
+            <li>
+              <Link to="/dashboard/myReview" className="link link-hover">
+                Add Reviews
+              </Link>
+            </li>
+          )}
+
+          <li>
+            <Link to="/dashboard/myProfile" className="link link-hover">
+              My Profile
+            </Link>
+          </li>
           {admin && (
             <li>
-              <Link to="/dashboard/doctors" className="link link-hover">
-                Add a doctor
+              <Link to="/dashboard/orders" className="link link-hover">
+                Manage All Orders
+              </Link>
+            </li>
+          )}
+          {admin && (
+            <li>
+              <Link to="/dashboard/addProducts" className="link link-hover">
+                Add Product
               </Link>
             </li>
           )}
           {admin && (
             <li>
               <Link to="/dashboard/users" className="link link-hover">
-                All Users
+                Make Admin
               </Link>
             </li>
           )}
           {admin && (
             <li>
-              <Link to="/dashboard/managedoctors" className="link link-hover">
-                Manage Doctors
+              <Link to="/dashboard/manageProducts" className="link link-hover">
+                Manage Products
               </Link>
             </li>
           )}

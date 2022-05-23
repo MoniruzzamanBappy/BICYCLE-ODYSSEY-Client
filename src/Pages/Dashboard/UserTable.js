@@ -18,7 +18,7 @@ const UserTable = ({ item, index, refetch }) => {
         return res.json();
       })
       .then((data) => {
-        if (data.modifiedCount > 0) {
+        if (data.result.modifiedCount > 0) {
           refetch();
           toast.success(`Admin Added ${email}`);
         }
