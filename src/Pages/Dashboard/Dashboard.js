@@ -20,12 +20,16 @@ const Dashboard = () => {
       </div>
       <div className="drawer-side">
         <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
-        <ul className="menu p-4 overflow-y-auto w-48 bg-accent text-base-content">
+        <ul className="menu p-4 overflow-y-auto w-60 text-base-content">
           {/* <!-- Sidebar content here --> */}
-
+          <li>
+            <Link to="/dashboard/myProfile" className="link link-hover">
+              My Profile
+            </Link>
+          </li>
           {!admin && (
             <li>
-              <Link to="/dashboard" className="link link-hover">
+              <Link to="/dashboard/myOrder" className="link link-hover">
                 My Orders
               </Link>
             </li>
@@ -39,11 +43,7 @@ const Dashboard = () => {
             </li>
           )}
 
-          <li>
-            <Link to="/dashboard/myProfile" className="link link-hover">
-              My Profile
-            </Link>
-          </li>
+          
           {admin && (
             <li>
               <Link to="/dashboard/orders" className="link link-hover">

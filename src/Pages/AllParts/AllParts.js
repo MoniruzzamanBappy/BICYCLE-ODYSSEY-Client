@@ -2,9 +2,13 @@ import React from "react";
 import useParts from "../../hooks/useParts";
 import Part from "./../Home/Part";
 import Footer from './../Shared/Footer/Footer';
+import Loading from './../Shared/Loading/Loading';
 
 const AllParts = () => {
-  const [part] = useParts();
+  const [isLoading,part] = useParts();
+  if(isLoading){
+    return <Loading />
+  }
   return (
     <div>
       <h1 className="text-4xl font-extrabold text-bold text-center">

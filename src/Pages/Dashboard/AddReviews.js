@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import useParts from "./../../hooks/useParts";
 import AddAReviewForm from './AddAReviewForm';
 import ReviewModal from "./ReviewModal";
+import Loading from './../Shared/Loading/Loading';
 
 const AddReviews = () => {
-  const [part] = useParts();
+  const [isLoading,part] = useParts();
   const [reviewItem, setReviewItem] = useState(null)
-
+  if(isLoading){
+    return <Loading />
+  }
   return (
     <div className='m-5'>
       <h1 className="text-4xl font-extrabold text-bold text-center">

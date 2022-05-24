@@ -19,7 +19,7 @@ const Purchase = () => {
     fetch(`http://localhost:5000/parts/${_id}`).then((res) => res.json())
   );
 
-  const handleAddToCart = async (e) => {
+  const handleAddToCart = (e) => {
     e.preventDefault();
     const number = e.target.number.value;
     const address = e.target.address.value;
@@ -48,11 +48,16 @@ const Purchase = () => {
             orderQuantity >= parseInt(part.order)
           ) {
             const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
-            const url = `http://localhost:5000/parts/${_id}`;
-            const { data } = axios.put(url, { deliveredQuantity });
-            toast.success("Added to cart, Successfully");
-            e.target.reset();
-            refetch();
+            const updateQuantity = async () => {
+              const url = `http://localhost:5000/parts/${_id}`;
+              const { data } = await axios.put(url, { deliveredQuantity });
+              if (data.acknowledged) {
+                toast.success("Added to cart, Successfully");
+                e.target.reset();
+                refetch();
+              }
+            };
+            updateQuantity();
           } else {
             toast.error("Order Quantity less than minimum order");
           }
