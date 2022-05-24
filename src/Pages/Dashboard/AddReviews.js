@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from "react";
+import useParts from "./../../hooks/useParts";
+import AddAReviewForm from './AddAReviewForm';
+import ReviewModal from "./ReviewModal";
 
 const AddReviews = () => {
-    return (
-        <div>
-            <h1>reviews</h1>
-        </div>
-    );
+  const [part] = useParts();
+  const [reviewItem, setReviewItem] = useState(null)
+
+  return (
+    <div className='m-5'>
+      <h1 className="text-4xl font-extrabold text-bold text-center">
+        Add A Review
+      </h1>
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 gap-10 mt-16">
+        {part.map((item) => (
+          <AddAReviewForm key={item._id} setReviewItem={setReviewItem} item={item}></AddAReviewForm>
+        ))}
+      </div>
+      {
+        reviewItem && <ReviewModal setReviewItem={setReviewItem} reviewItem={reviewItem}></ReviewModal>
+      }
+    </div>
+  );
 };
 
 export default AddReviews;
