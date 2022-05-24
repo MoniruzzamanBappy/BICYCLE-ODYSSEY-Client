@@ -18,6 +18,7 @@ import AboutMe from "./Pages/Dashboard/AboutMe";
 import ManageAllOrders from "./Pages/Dashboard/ManageAllOrders";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import ManageProducts from "./Pages/Dashboard/ManageProducts";
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
       <ToastContainer />

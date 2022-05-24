@@ -42,7 +42,6 @@ const Purchase = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged) {
           if (
             orderQuantity < parseInt(part.quantity) &&
@@ -51,8 +50,6 @@ const Purchase = () => {
             const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
             const url = `http://localhost:5000/parts/${_id}`;
             const { data } = axios.put(url, { deliveredQuantity });
-
-            console.log(data);
             toast.success("Added to cart, Successfully");
             e.target.reset();
             refetch();
