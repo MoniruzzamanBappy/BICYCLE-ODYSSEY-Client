@@ -13,11 +13,13 @@ const ReviewModal = ({ reviewItem, setReviewItem }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const review = e.target.review.value;
+    const rating = e.target.rating.value;
     const reviews = {
       productName,
       img,
       email: user.email,
       review,
+      rating
     };
     fetch("https://bicycle-odyssey.herokuapp.com/reviews", {
       method: "POST",
@@ -72,6 +74,13 @@ const ReviewModal = ({ reviewItem, setReviewItem }) => {
               name="review"
               required
               placeholder="Add a review"
+              className="input input-bordered w-full max-w-md"
+            />
+            <input
+              type="number"
+              name="rating"
+              required
+              placeholder="How many star you want to give?"
               className="input input-bordered w-full max-w-md"
             />
 
