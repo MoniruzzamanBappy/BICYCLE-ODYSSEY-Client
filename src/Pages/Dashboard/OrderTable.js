@@ -1,21 +1,8 @@
 import React from "react";
-import { toast } from "react-toastify";
 
-const OrderTable = ({ item, index, refetch }) => {
-  const { partName, price, orderQuantity, email, _id } = item;
-  const handleDelete = (_id) => {
-    const url = `http://localhost:5000/ordered/${_id}`;
-    fetch(url, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          toast(`Deleted ${partName} Order`);
-          refetch();
-        }
-      });
-  };
+const OrderTable = ({ item, index, setDeleteOrder }) => {
+  const { partName, price, orderQuantity, email } = item;
+
   return (
     <tr key={item._id}>
       <th>{index + 1}</th>
@@ -24,12 +11,13 @@ const OrderTable = ({ item, index, refetch }) => {
       <th>{orderQuantity}</th>
       <th>
         {email ? (
-          <button
-            onClick={() => handleDelete(_id)}
+          <label
+            for="deleteModalConfirm"
+            onClick={() => setDeleteOrder(item)}
             className="btn btn-success btn-xs"
           >
             Delete Order
-          </button>
+          </label>
         ) : (
           "Paid"
         )}

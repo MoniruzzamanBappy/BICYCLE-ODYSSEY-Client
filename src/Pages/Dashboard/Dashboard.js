@@ -23,7 +23,7 @@ const Dashboard = () => {
         <ul className="menu p-4 overflow-y-auto w-60 text-base-content">
           {/* <!-- Sidebar content here --> */}
           <li>
-            <Link to="/dashboard/myProfile" className="link link-hover">
+            <Link to="/dashboard" className="link link-hover">
               My Profile
             </Link>
           </li>

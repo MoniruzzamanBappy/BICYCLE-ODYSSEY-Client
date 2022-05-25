@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading/Loading";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import ManageOrderTable from "./ManageOrderTable";
 
 const ManageAllOrders = () => {
+  const [deleteOrder, setDeleteOrder] = useState(null);
   const {
     isLoading,
     data: ordered,
@@ -33,11 +35,17 @@ const ManageAllOrders = () => {
       </thead>
       <tbody>
       {ordered.map((item, index) => (
-        <ManageOrderTable key={item._id} refetch={refetch}  index={index} item={item}></ManageOrderTable>
+        <ManageOrderTable key={item._id} setDeleteOrder={setDeleteOrder}  index={index} item={item}></ManageOrderTable>
       ))}
       </tbody>
     </table>
-   
+    {deleteOrder && (
+        <DeleteConfirmationModal
+          setDeleteOrder={setDeleteOrder}
+          refetch={refetch}
+          deleteOrder={deleteOrder}
+        ></DeleteConfirmationModal>
+      )}
   </div>
   );
 };
