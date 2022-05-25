@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./Pages/Shared/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
@@ -7,7 +8,6 @@ import Signup from "./Pages/SignUp/Signup";
 import RequireAuth from "./Pages/Shared/RequireAuth/RequireAuth";
 import Purchase from "./Pages/Purchase/Purchase";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import AllParts from "./Pages/AllParts/AllParts";
 import Users from "./Pages/Dashboard/Users";
@@ -19,6 +19,7 @@ import ManageAllOrders from "./Pages/Dashboard/ManageAllOrders";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import NotFound from './Pages/NotFound/NotFound';
+import Payment from './Pages/Dashboard/Payment';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/parts" element={<AllParts />}></Route>
+          
           <Route
             path="/purchase/:_id"
             element={
@@ -47,6 +49,7 @@ function App() {
           >
             <Route path="myOrder" element={<MyOrder />}></Route>
             <Route path="myReview" element={<AddReviews />}></Route>
+            <Route path="payment/:id" element={<Payment />}></Route>
             <Route index element={<AboutMe />}></Route>
             <Route
               path="orders"

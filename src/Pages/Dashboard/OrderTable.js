@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OrderTable = ({ item, index, setDeleteOrder }) => {
-  const { partName, price, orderQuantity, email } = item;
+  const { partName, price, orderQuantity, _id, paid } = item;
 
   return (
     <tr key={item._id}>
@@ -10,14 +11,19 @@ const OrderTable = ({ item, index, setDeleteOrder }) => {
       <th>{price}</th>
       <th>{orderQuantity}</th>
       <th>
-        {email ? (
-          <label
-            for="deleteModalConfirm"
-            onClick={() => setDeleteOrder(item)}
-            className="btn btn-success btn-xs"
-          >
-            Delete Order
-          </label>
+        {!paid ? (
+          <>
+            <Link to={`/dashboard/payment/${_id}`}>
+              <button className="btn btn-success btn-xs mr-2">Pay</button>
+            </Link>
+            <label
+              htmlFor="deleteModalConfirm"
+              onClick={() => setDeleteOrder(item)}
+              className="btn btn-error btn-xs"
+            >
+              Delete Order
+            </label>
+          </>
         ) : (
           "Paid"
         )}
