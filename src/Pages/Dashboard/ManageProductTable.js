@@ -8,7 +8,7 @@ const ManageProductTable = ({ item, index, refetch }) => {
     e.preventDefault();
     const newQuantity = e.target.quantity.value;
     const deliveredQuantity = parseInt(quantity) + parseInt(newQuantity);
-    const url = `http://localhost:5000/parts/${_id}`;
+    const url = `https://bicycle-odyssey.herokuapp.com/parts/${_id}`;
     const { data } = await axios.put(url, { deliveredQuantity });
     if (data.acknowledged) {
       toast.success("Updated Successfully");

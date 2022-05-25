@@ -16,7 +16,7 @@ const Purchase = () => {
     data: part,
     refetch,
   } = useQuery(["available"], () =>
-    fetch(`http://localhost:5000/parts/${_id}`).then((res) => res.json())
+    fetch(`https://bicycle-odyssey.herokuapp.com/parts/${_id}`).then((res) => res.json())
   );
 
   const handleAddToCart = (e) => {
@@ -33,7 +33,7 @@ const Purchase = () => {
       address,
       price: part.price,
     };
-    fetch("http://localhost:5000/ordered", {
+    fetch("https://bicycle-odyssey.herokuapp.com/ordered", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -49,7 +49,7 @@ const Purchase = () => {
           ) {
             const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
             const updateQuantity = async () => {
-              const url = `http://localhost:5000/parts/${_id}`;
+              const url = `https://bicycle-odyssey.herokuapp.com/parts/${_id}`;
               const { data } = await axios.put(url, { deliveredQuantity });
               if (data.acknowledged) {
                 toast.success("Added to cart, Successfully");

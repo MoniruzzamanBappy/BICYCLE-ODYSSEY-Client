@@ -4,7 +4,7 @@ import Loading from "../Shared/Loading/Loading";
 import UserTable from "./UserTable";
 
 const Users = () => {
-  const url = `http://localhost:5000/users`;
+  const url = `https://bicycle-odyssey.herokuapp.com/users`;
   const { isLoading, data: users, refetch } = useQuery("users", () =>
     fetch(url, {
       method: "GET",

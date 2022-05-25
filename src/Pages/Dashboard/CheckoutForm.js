@@ -14,7 +14,7 @@ const CheckoutForm = ({ part }) => {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     const totalPrice = parseInt(price)
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://bicycle-odyssey.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -77,7 +77,7 @@ const CheckoutForm = ({ part }) => {
         partId: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/ordered/${_id}`, {
+      fetch(`https://bicycle-odyssey.herokuapp.com/ordered/${_id}`, {
         method: "PATCH",
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

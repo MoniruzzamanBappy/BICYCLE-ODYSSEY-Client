@@ -9,7 +9,7 @@ const AboutMe = () => {
   const [user, loading] = useAuthState(auth);
   const [editProfile, setEditProfile] = useState(null)
   const {isLoading, data: profile, refetch } = useQuery(["profile"], () =>
-    fetch(`http://localhost:5000/profiles?email=${user.email}`).then((res) => res.json())
+    fetch(`https://bicycle-odyssey.herokuapp.com/profiles?email=${user.email}`).then((res) => res.json())
   );
   if (loading || isLoading) {
     return <Loading />;

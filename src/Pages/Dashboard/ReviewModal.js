@@ -19,7 +19,7 @@ const ReviewModal = ({ reviewItem, setReviewItem }) => {
       email: user.email,
       review,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://bicycle-odyssey.herokuapp.com/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

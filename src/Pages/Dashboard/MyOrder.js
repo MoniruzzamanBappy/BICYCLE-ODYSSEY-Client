@@ -11,7 +11,7 @@ const MyOrder = () => {
 
   const [deleteOrder, setDeleteOrder] = useState(null);
   const email = user?.email;
-  const url = `http://localhost:5000/ordered?email=${email}`;
+  const url = `https://bicycle-odyssey.herokuapp.com/ordered?email=${email}`;
   const {
     isLoading,
     data: part,

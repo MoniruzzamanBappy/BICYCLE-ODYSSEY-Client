@@ -12,7 +12,7 @@ const AddProduct = () => {
         const order = e.target.order.value;
         const item = { productName, img, order, quantity, price, description } 
         
-        fetch('http://localhost:5000/parts', {
+        fetch('https://bicycle-odyssey.herokuapp.com/parts', {
              method: 'POST',
              headers:{
                  'content-type': 'application/json'

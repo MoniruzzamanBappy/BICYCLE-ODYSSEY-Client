@@ -15,7 +15,7 @@ const stripePromise = loadStripe(
 const Payment = () => {
   const { id } = useParams();
   const [user, loading] = useAuthState(auth);
-  const url = `http://localhost:5000/ordered/${id}`;
+  const url = `https://bicycle-odyssey.herokuapp.com/ordered/${id}`;
   const { data: part, isLoading } = useQuery(["orderId", id], () =>
     fetch(url, {
       method: "GET",

@@ -11,7 +11,7 @@ const ManageAllOrders = () => {
     data: ordered,
     refetch,
   } = useQuery(["orderd"], () =>
-    fetch(`http://localhost:5000/ordered`).then((res) => res.json())
+    fetch(`https://bicycle-odyssey.herokuapp.com/ordered`).then((res) => res.json())
   );
   if(isLoading){
       return <Loading />
@@ -35,7 +35,7 @@ const ManageAllOrders = () => {
       </thead>
       <tbody>
       {ordered.map((item, index) => (
-        <ManageOrderTable key={item._id} setDeleteOrder={setDeleteOrder}  index={index} item={item}></ManageOrderTable>
+        <ManageOrderTable key={item._id} setDeleteOrder={setDeleteOrder} refetch={refetch} index={index} item={item}></ManageOrderTable>
       ))}
       </tbody>
     </table>

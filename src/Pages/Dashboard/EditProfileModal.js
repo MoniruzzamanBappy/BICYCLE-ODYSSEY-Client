@@ -29,7 +29,7 @@ const EditProfileModal = ({ setEditProfile, refetch }) => {
       number,
       linkedin,
     };
-    fetch("http://localhost:5000/profiles", {
+    fetch("https://bicycle-odyssey.herokuapp.com/profiles", {
       method: "POST",
       headers: {
         "content-type": "application/json",
