@@ -5,7 +5,7 @@ import UserTable from "./UserTable";
 
 const Users = () => {
   const url = `https://bicycle-odyssey.herokuapp.com/users`;
-  const { isLoading, data: users, refetch } = useQuery("users", () =>
+  const { isLoading, data: webUser, refetch } = useQuery("users", () =>
     fetch(url, {
       method: "GET",
       headers: {
@@ -30,7 +30,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((item, index) => (
+          {webUser?.map((item, index) => (
             <UserTable key={item._id} index={index} refetch={refetch} item={item}></UserTable>
           ))}
         </tbody>
