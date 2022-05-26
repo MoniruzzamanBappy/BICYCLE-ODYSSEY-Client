@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { toast } from "react-toastify";
 
-const ManageProductTable = ({ item, index, refetch }) => {
+const ManageProductTable = ({ item, index, refetch, setDeleteProduct }) => {
   const { _id, productName, img, quantity } = item;
   const updateQuantity = async (e) => {
     e.preventDefault();
@@ -44,6 +44,13 @@ const ManageProductTable = ({ item, index, refetch }) => {
             value="Add Item"
           />
         </form>
+        <label
+              htmlFor="deleteProductModalConfirm"
+              onClick={() => setDeleteProduct(item)}
+              className="btn btn-error btn-xs"
+            >
+              Delete Product
+            </label>
       </th>
     </tr>
   );

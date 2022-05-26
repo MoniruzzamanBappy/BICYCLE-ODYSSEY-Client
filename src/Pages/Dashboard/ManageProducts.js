@@ -2,9 +2,12 @@ import React from 'react';
 import useParts from './../../hooks/useParts';
 import ManageProductTable from './ManageProductTable';
 import Loading from './../Shared/Loading/Loading';
+import { useState } from 'react';
+import DeleteProductModal from './DeleteProductModal';
 
 const ManageProducts = () => {
     const [isLoading, part, refetch] = useParts();
+    const [deleteProduct, setDeleteProduct] = useState(null);
     if(isLoading){
         return <Loading />
     }
@@ -31,7 +34,13 @@ const ManageProducts = () => {
         ))}
         </tbody>
       </table>
-     
+      {deleteProduct && (
+        <DeleteProductModal
+        setDeleteProduct={setDeleteProduct}
+          refetch={refetch}
+          deleteProduct={deleteProduct}
+        ></DeleteProductModal>
+      )}
     </div>
     );
 };
