@@ -1,11 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import auth from "./../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./../Shared/Loading/Loading";
 import { toast } from "react-toastify";
 import { useQuery } from "react-query";
+import { useForm } from "react-hook-form";
 
 const Purchase = () => {
   const { _id } = useParams();
@@ -16,57 +16,33 @@ const Purchase = () => {
     data: part,
     refetch,
   } = useQuery(["available"], () =>
-    fetch(`https://bicycle-odyssey.herokuapp.com/parts/${_id}`).then((res) => res.json())
+    fetch(`https://bicycle-odyssey.herokuapp.com/parts/${_id}`).then((res) =>
+      res.json()
+    )
   );
-
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    const number = e.target.number.value;
-    const address = e.target.address.value;
-    const orderQuantity = e.target.quantity.value;
-    const ordered = {
-      userName: user.displayName,
-      partName: part.productName,
-      email: user.email,
-      number,
-      orderQuantity,
-      address,
-      price: part.price,
-    };
-    fetch("https://bicycle-odyssey.herokuapp.com/ordered", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(ordered),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          if (
-            orderQuantity < parseInt(part.quantity) &&
-            orderQuantity >= parseInt(part.order)
-          ) {
-            const deliveredQuantity = parseInt(part.quantity) - orderQuantity;
-            const updateQuantity = async () => {
-              const url = `https://bicycle-odyssey.herokuapp.com/parts/${_id}`;
-              const { data } = await axios.put(url, { deliveredQuantity });
-              if (data.acknowledged) {
-                toast.success("Added to cart, Successfully");
-                e.target.reset();
-                refetch();
-              }
-            };
-            updateQuantity();
-          } else {
-            toast.error("Order Quantity less than minimum order");
+  const { register,formState: { errors }, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    if (data) {
+      const order = { ...data, price: part.price };
+      fetch("https://bicycle-odyssey.herokuapp.com/ordered", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(order),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Added to cart, Successfully");
+            reset();
+            refetch();
           }
-        } else {
-          toast.error("Added to cart, Failed");
-        }
-      });
+        });
+    } else {
+      toast.error("Added to cart, Failed");
+    }
   };
-
   if (loading || isLoading) {
     return <Loading />;
   }
@@ -86,60 +62,51 @@ const Purchase = () => {
       </div>
       <div className="card p-5 my-5 lg:mx-5 w-96 bg-base-100 shadow-xl">
         <form
-          onSubmit={handleAddToCart}
           className="grid grid-cols-1 pt-2.5 justify-items-center gap-5"
-          action=""
+          onSubmit={handleSubmit(onSubmit)}
         >
           <input
-            type="text"
-            readOnly
-            name="name"
-            value={part.productName}
+            placeholder="Product Name"
             className="input input-bordered  w-full max-w-md"
+            defaultValue={part.productName}
+            {...register("partName", { required: true })}
           />
-
           <input
-            type="text"
-            name="name"
-            value={user?.displayName || ""}
-            readOnly
             placeholder="Full Name"
-            className="input input-bordered w-full max-w-md"
+            className="input input-bordered  w-full max-w-md"
+            defaultValue={user.displayName}
+            {...register("userName", { required: true })}
           />
           <input
-            type="email"
-            name="email"
-            readOnly
-            value={user?.email || ""}
-            placeholder="Email"
-            className="input input-bordered w-full max-w-md"
+            className="input input-bordered  w-full max-w-md"
+            defaultValue={user.email}
+            {...register("email", { required: true })}
           />
           <input
-            type="text"
-            name="address"
-            required
             placeholder="Address"
-            className="input input-bordered w-full max-w-md"
+            className="input input-bordered  w-full max-w-md"
+            {...register("address", { required: true })}
           />
           <input
-            type="number"
-            name="number"
-            required
-            placeholder="Number"
-            className="input input-bordered w-full max-w-md"
+            placeholder="Phone Number"
+            className="input input-bordered  w-full max-w-md"
+            {...register("number", { required: true })}
           />
           <input
-            type="number"
-            name="quantity"
-            required
             placeholder="Order Quantity"
-            className="input input-bordered w-full max-w-md"
+            defaultValue={part.order}
+            className="input input-bordered  w-full max-w-md"
+            type="number"
+            {...register("orderQuantity", {
+              min: part.order,
+              max: part.quantity,
+            })}
           />
-
+          {errors.orderQuantity && "Invalid Quantity"}
           <input
             className="btn w-full max-w-md btn-accent"
-            type="submit"
             value="Add to Cart"
+            type="submit"
           />
         </form>
       </div>

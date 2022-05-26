@@ -4,8 +4,8 @@ const ReviewSingle = ({ item }) => {
   const { productName, review, email, img, rating } = item;
   return (
     <div className="flex w-full">
-      <div class="avatar mr-2">
-        <div class="w-16 rounded-full">
+      <div className="avatar mr-2">
+        <div className="w-16 rounded-full">
           <img src={img} alt="product" />
         </div>
       </div>

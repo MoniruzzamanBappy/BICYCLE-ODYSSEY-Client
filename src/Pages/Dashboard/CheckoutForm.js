@@ -13,7 +13,7 @@ const CheckoutForm = ({ part }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    const totalPrice = parseInt(price)
+    const totalPrice = parseInt(price)*parseInt(orderQuantity)
     fetch("https://bicycle-odyssey.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
@@ -28,7 +28,7 @@ const CheckoutForm = ({ part }) => {
           setClientSecret(data.clientSecret);
         }
       });
-  }, [price]);
+  }, [orderQuantity, price]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,6 +46,7 @@ const CheckoutForm = ({ part }) => {
       type: "card",
       card,
     });
+    
 
     if (error) {
       setCardError(error.message);

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {
   useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
@@ -16,6 +17,7 @@ const Signup = () => {
   let loginError;
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+    const [sendEmailVerification, sending, error3] = useSendEmailVerification(auth);
   const [updateProfile, updating, error1] = useUpdateProfile(auth);
   const [signInWithGoogle, user1, loading1, error2] = useSignInWithGoogle(auth);
   const [token] = useToken(user || user1)
@@ -24,6 +26,7 @@ const Signup = () => {
     const email = e.target.email.value;
     const pass = e.target.password.value;
     const displayName = e.target.name.value;
+    await sendEmailVerification()
     await updateProfile({ displayName });
     await createUserWithEmailAndPassword(email, pass);
   };
@@ -32,14 +35,14 @@ const Signup = () => {
       navigate(from, { replace: true });
     }
   }, [from, navigate, token, user, user1]);
-  if (error || error1 || error2) {
+  if (error || error1 || error2 || error3) {
     loginError = (
       <p className="text-red-500">
         <small>{error?.message || error1?.message || error2.message}</small>
       </p>
     );
   }
-  if (updating || loading || loading1) {
+  if (updating || loading || loading1 || sending) {
     return <Loading></Loading>;
   }
   const handleHaveAccount = () => {
