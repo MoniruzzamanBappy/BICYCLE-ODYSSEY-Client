@@ -10,7 +10,6 @@ const Review = () => {
   if(isLoading){
       return <Loading />
   }
-  console.log(reviews);
     return (
         <div>
              <h1 className="text-4xl font-extrabold text-bold text-center">

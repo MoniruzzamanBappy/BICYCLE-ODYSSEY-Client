@@ -4,7 +4,7 @@ const Blogs = () => {
   return (
     <div className="mt-5">
       <h1 className="text-4xl font-extrabold text-bold text-center">Blogs</h1>
-      <div class="divider"></div>
+      <div className="divider"></div>
       <h1 className="text-2xl font-extrabold text-bold">
         How will you improve the performance of a React Application?
       </h1>
@@ -17,7 +17,7 @@ const Blogs = () => {
         <li>Windowing or list virtualization in React.</li>
         <li>Lazy loading images in React.</li>
       </ul>
-      <div class="divider"></div>
+      <div className="divider"></div>
       <h1 className="text-2xl font-extrabold text-bold">
         What are the different ways to manage a state in a React application?
       </h1>
@@ -27,7 +27,7 @@ const Blogs = () => {
         <li>Server state.</li>
         <li>URL state.</li>
       </ul>
-      <div class="divider"></div>
+      <div className="divider"></div>
       <h1 className="text-2xl font-extrabold text-bold">
         How does prototypical inheritance work?
       </h1>
@@ -40,7 +40,7 @@ const Blogs = () => {
         of an object, we use Object.getPrototypeOf and Object.setPrototypeOf.
         Nowadays, in modern language, it is being set using __proto__.
       </p>
-      <div class="divider"></div>
+      <div className="divider"></div>
       <h1 className="text-2xl font-extrabold text-bold">
         What is a unit test?
       </h1>
@@ -68,7 +68,7 @@ const Blogs = () => {
         unit tests, but project managers and clients should evaluate the time
         needed to develop unit tests during the project.
       </p>
-      <div class="divider"></div>
+      <div className="divider"></div>
       <h1 className="text-2xl font-extrabold text-bold">
         Why you do not set the state directly in React?
       </h1>
