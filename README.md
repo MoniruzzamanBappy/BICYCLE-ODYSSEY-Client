@@ -1,6 +1,6 @@
 # Bicycle Odyssey
 
-To visit the website [Click here](https://passional-pedals.web.app/).
+To visit the website [Click here...](https://bicycle-odyssey.web.app/)
 
 ## About This Project
 * A manufacture company that contain all kind of cycle accessory's
@@ -19,6 +19,7 @@ To visit the website [Click here](https://passional-pedals.web.app/).
 * React Toast
 * Stripe
 * React Query
+* React Hook Form
 * Firebase Authentication
 * React Firebase Hooks
 * Toastify
