@@ -25,7 +25,7 @@ const OrderTable = ({ item, index, setDeleteOrder }) => {
             </label>
           </>
         ) : (
-          <p>{transactionId}</p>
+          <p>transactionId: {transactionId}</p>
         )}
       </th>
     </tr>

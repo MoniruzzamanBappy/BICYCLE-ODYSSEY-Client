@@ -16,7 +16,7 @@ const ReviewsHome = () => {
         Reviews
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 mt-16">
-        {reviews.reverse().slice(0,6).map((item) => (
+        {reviews?.reverse().slice(0,6).map((item) => (
           <ReviewSingle key={item._id} item={item}></ReviewSingle>
         ))}
       </div>
