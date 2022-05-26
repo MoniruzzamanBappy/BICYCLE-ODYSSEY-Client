@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import auth from "./../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./../Shared/Loading/Loading";
@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { useForm } from "react-hook-form";
 
 const Purchase = () => {
+  const navigate = useNavigate();
   const { _id } = useParams();
   const [user, loading] = useAuthState(auth);
 
@@ -37,6 +38,7 @@ const Purchase = () => {
             toast.success("Added to cart, Successfully");
             reset();
             refetch();
+            navigate('/dashboard/myOrder')
           }
         });
     } else {
