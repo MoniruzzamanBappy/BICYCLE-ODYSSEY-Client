@@ -21,6 +21,7 @@ import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import NotFound from './Pages/NotFound/NotFound';
 import Payment from './Pages/Dashboard/Payment';
 import Review from "./Pages/Review/Review";
+import Blogs from './Pages/Blogs/Blogs';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/blogs" element={<Blogs />}></Route>
           <Route path="/parts" element={<AllParts />}></Route>
           <Route path="/reviews" element={<Review />}></Route>
           
