@@ -30,7 +30,7 @@ const ManageProducts = () => {
         </thead>
         <tbody>
         {part.map((item, index) => (
-          <ManageProductTable key={item._id} refetch={refetch}  index={index} item={item}></ManageProductTable>
+          <ManageProductTable key={item._id} refetch={refetch} setDeleteProduct={setDeleteProduct}  index={index} item={item}></ManageProductTable>
         ))}
         </tbody>
       </table>

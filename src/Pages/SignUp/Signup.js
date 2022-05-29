@@ -38,7 +38,7 @@ const Signup = () => {
   if (error || error1 || error2 || error3) {
     loginError = (
       <p className="text-red-500">
-        <small>{error?.message || error1?.message || error2.message}</small>
+        <small>{error?.message || error1?.message || error2?.message}</small>
       </p>
     );
   }

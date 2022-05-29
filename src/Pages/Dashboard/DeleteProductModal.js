@@ -30,7 +30,7 @@ const DeleteProductModal = ({ deleteProduct, refetch, setDeleteProduct}) => {
             <label onClick={()=>handleDelete(_id)} htmlFor="deleteProductModalConfirm" className="btn btn-error">
               Delete
             </label>
-            <label htmlFor="deleteModalConfirm" className="btn">
+            <label htmlFor="deleteProductModalConfirm" className="btn">
               Cancel
             </label>
           </div>
