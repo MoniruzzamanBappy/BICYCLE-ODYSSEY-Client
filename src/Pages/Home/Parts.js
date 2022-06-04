@@ -22,7 +22,7 @@ const Parts = () => {
             </div>
 
             <div className='flex justify-center'>
-            <button onClick={handleSeeAll} className="btn my-5 btn-secondary">
+            <button onClick={handleSeeAll} className="btn btn-secondary">
             See All Parts
           </button>
             </div>

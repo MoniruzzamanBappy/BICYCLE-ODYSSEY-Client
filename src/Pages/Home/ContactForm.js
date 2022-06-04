@@ -1,55 +1,110 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const ContactForm = () => {
+  const handleSend=(e)=>{
+    e.preventDefault();
+    const firstName = e.target.firstName.value;
+    const lastName = e.target.lastName.value;
+    const subject = e.target.subject.value;
+    const email = e.target.email.value;
+    const message = e.target.message.value;
+    const name =firstName.concat(" ", lastName);
+    const data = {
+      name,
+      email,
+      subject,
+      message
+    }
+    console.log(data);
+    fetch('https://bicycle-odyssey.herokuapp.com/email', {
+             method: 'POST',
+             headers:{
+                 'content-type': 'application/json'
+             },
+             body: JSON.stringify(data)
+         })
+         .then(res=>res.json())
+         .then(data=>{
+            toast.success("Message send successfully!");
+            e.target.reset()
+         })
+  }
     return (
-        <div className="mt-5">
-             <h1 className="text-4xl my-3 font-extrabold text-bold text-center">
-        Contact With Us
-      </h1>
-      <form className="w-full mx-auto max-w-lg">
-  <div className="flex flex-wrap -mx-3 mb-6">
-    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-        First Name
-      </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane"/>
-     
-    </div>
-    <div className="w-full md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
-        Last Name
-      </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe"/>
-    </div>
-  </div>
-  <div className="flex flex-wrap -mx-3 mb-6">
-    <div className="w-full px-3">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-        E-mail
-      </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" type="email"/>
-      
-    </div>
-  </div>
-  <div className="flex flex-wrap -mx-3 mb-6">
-    <div className="w-full px-3">
-      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-        Message
-      </label>
-      <textarea className=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" id="message"></textarea>
-     
-    </div>
-  </div>
-  <div className="md:flex md:items-center">
-    <div className="md:w-1/3">
-      <button className="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-        Send
-      </button>
-    </div>
-    <div className="md:w-2/3"></div>
-  </div>
-</form>
+      <div className="card h-screen w-screen bg-base-100 shadow-xl p-8 mx-auto my-4">
+        <div className="text-center">
+          <h1 className="text-5xl mb-9 font-bold">Contact Us</h1>
         </div>
+        <form
+          onSubmit={handleSend}
+          className="grid grid-cols-1 pt-2.5 justify-items-center gap-3"
+          action=""
+        >
+          <div className="w-full max-w-md">
+            <label className="label">
+              <span className="label-text">First Name</span>
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              className="input input-bordered w-full max-w-md"
+            />
+          </div>
+          <div className="w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Last Name</span>
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              className="input w-full max-w-md input-bordered "
+            />
+          </div>
+          <div className="w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="input w-full max-w-md input-bordered "
+            />
+          </div>
+          <div className="w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Subject</span>
+            </label>
+            <input
+
+              type="text"
+              name="subject"
+              placeholder="Email Subject"
+              className="input w-full max-w-md input-bordered "
+            />
+          </div>
+          <div className="w-full max-w-md">
+            <label className="label">
+              <span className="label-text">Message</span>
+            </label>
+            <textarea
+              type="text"
+              name="message"
+              placeholder="Message"
+              className="input w-full max-w-md input-bordered "
+            />
+          </div>
+          <input
+            className="btn w-full max-w-md text-white btn-accent"
+            type="submit"
+            value="Send"
+          />
+        </form>
+      </div>
+
        
     );
 };

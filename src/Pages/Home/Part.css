@@ -1,0 +1,29 @@
+.card-part {
+    transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-border-radius: 17px;
+    border-radius: 17px;
+    background: #ffffff;
+    -webkit-box-shadow: 10px 10px 25px #c2c2c2, -10px -10px 25px #ffffff;
+    box-shadow: 10px 10px 25px #c2c2c2, -10px -10px 25px #ffffff;
+}
+
+.card-part:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.card-part .card-part-image {
+    border-radius: 39% 61% 31% 69% / 36% 26% 74% 64% ;
+    transition: all .3s ease-in-out;
+
+
+}
+
+.card-part .card-part-image:hover {
+    transform: scale(1.15);
+}
+
+.card-part .card-part-content .card-part-button:hover {
+    background-color: #000;
+    color: #fff;
+}
