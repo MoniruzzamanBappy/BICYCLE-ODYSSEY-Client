@@ -6,6 +6,7 @@ import Loading from './../Shared/Loading/Loading';
 
 const Parts = () => {
     const [isLoading, part, ] = useParts()
+    console.log(part)
     const navigate = useNavigate()
     const handleSeeAll = ()=> {
         navigate('/parts')

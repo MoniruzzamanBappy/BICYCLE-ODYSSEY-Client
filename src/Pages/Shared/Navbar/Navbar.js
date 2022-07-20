@@ -18,27 +18,27 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <Link to="/home">Home</Link>
+        <Link className="btn btn-ghost" to="/home">Home</Link>
       </li>
       <li>
-        <Link to="/parts">Parts</Link>
+        <Link className="btn btn-ghost" to="/parts">Parts</Link>
       </li>
       <li>
-        <Link to="/reviews">Reviews</Link>
+        <Link className="btn btn-ghost" to="/reviews">Reviews</Link>
       </li>
       <li>
-        <Link to="/blogs">Blogs</Link>
+        <Link className="btn btn-ghost" to="/blogs">Blogs</Link>
       </li>
       {user && (
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link className="btn btn-ghost" to="/dashboard">Dashboard</Link>
         </li>
       )}
       <li>
         {user ? (
-          <button onClick={logout}>Log Out</button>
+          <button className="btn btn-ghost" onClick={logout}>Log Out</button>
         ) : (
-          <Link to="/login">Login</Link>
+          <Link className="btn btn-ghost" to="/login">Login</Link>
         )}
       </li>
     </>

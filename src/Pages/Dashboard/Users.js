@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading/Loading";
 import UserTable from "./UserTable";
-
+// http://localhost:5000/
 const Users = () => {
   const url = `https://bicycle-odyssey.herokuapp.com/users`;
   const { isLoading, data: webUser, refetch } = useQuery("users", () =>
