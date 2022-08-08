@@ -1,4 +1,5 @@
 import React from "react";
+// import Skeleton from "react-loading-skeleton";
 
 const Blogs = () => {
   return (
@@ -85,6 +86,7 @@ const Blogs = () => {
         </li>
         <li>You will lose control of the state across all components.</li>
       </ul>
+      
     </div>
   );
 };

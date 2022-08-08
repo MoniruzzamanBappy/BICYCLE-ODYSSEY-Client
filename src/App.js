@@ -22,12 +22,13 @@ import NotFound from './Pages/NotFound/NotFound';
 import Payment from './Pages/Dashboard/Payment';
 import Review from "./Pages/Review/Review";
 import Blogs from './Pages/Blogs/Blogs';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
   return (
     <div>
       <Navbar />
-      <div className="px-12">
+      <div >
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
@@ -51,7 +52,6 @@ function App() {
               </RequireAuth>
             }
           >
-            <Route path="myOrder" element={<MyOrder />}></Route>
             <Route path="myOrder" element={<MyOrder />}></Route>
             <Route path="myReview" element={<AddReviews />}></Route>
             <Route path="payment/:id" element={<Payment />}></Route>

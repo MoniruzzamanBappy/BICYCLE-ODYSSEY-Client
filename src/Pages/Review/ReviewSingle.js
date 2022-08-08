@@ -1,19 +1,24 @@
 import React from "react";
+// import { AiFillStar } from "react-icons/ai";
+import ReactStars from "react-rating-stars-component";
 
 const ReviewSingle = ({ item }) => {
   const { productName, review, email, img, rating } = item;
+  let star = parseInt(rating);
   return (
-    <div className="flex w-full">
-      <div className="avatar mr-2">
-        <div className="w-16 rounded-full">
-          <img src={img} alt="product" />
-        </div>
-      </div>
-      <div>
-          <p>{productName}</p>
-          <p className="text-xs">{email}</p>
-          <p className="text-xs">{review}</p>
-          {rating && <p className="text-xs">Ratings: {rating? rating: ""} star</p>}
+    <div class="card w-96 bg-base-100 shadow-xl image-full">
+      <figure>
+        <img src={img} alt="Shoes" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{productName}</h2>
+        <p>{email}</p>
+        <p>Comment: {review}</p>
+        <ReactStars
+        count={5}
+        size={24}
+        value={star}
+         activeColor="#ff8c00" />
       </div>
     </div>
   );

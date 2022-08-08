@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import auth from "./../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./../Shared/Loading/Loading";
 import { toast } from "react-toastify";
+import  ReactStars  from "react-rating-stars-component";
 
 const ReviewModal = ({ reviewItem, setReviewItem }) => {
-  const { productName,img } = reviewItem;
+  const { productName, img } = reviewItem;
+  const [rating, setRating] = useState(0);
+  const ratingChanged = (rating) => {
+    setRating(rating);
+  };
   const [user, loading] = useAuthState(auth);
   if (loading) {
     return <Loading />;
@@ -13,14 +18,14 @@ const ReviewModal = ({ reviewItem, setReviewItem }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const review = e.target.review.value;
-    const rating = e.target.rating.value;
     const reviews = {
       productName,
       img,
       email: user.email,
       review,
-      rating
+      rating,
     };
+    console.log(reviews);
     fetch("https://bicycle-odyssey.herokuapp.com/reviews", {
       method: "POST",
       headers: {
@@ -33,7 +38,7 @@ const ReviewModal = ({ reviewItem, setReviewItem }) => {
         if (data.acknowledged) {
           toast.success("Review Added");
           setReviewItem(null);
-        } 
+        }
       });
   };
   return (
@@ -76,12 +81,11 @@ const ReviewModal = ({ reviewItem, setReviewItem }) => {
               placeholder="Add a review"
               className="input input-bordered w-full max-w-md"
             />
-            <input
-              type="number"
-              name="rating"
-              required
-              placeholder="How many star you want to give?"
-              className="input input-bordered w-full max-w-md"
+            <ReactStars
+              count={5}
+              onChange={ratingChanged}
+              size={40}
+              activeColor="#ff8c00"
             />
 
             <input

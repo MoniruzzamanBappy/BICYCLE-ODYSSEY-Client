@@ -10,7 +10,7 @@ const BusinessSummary = () => {
     return <Loading />;
   }
   return (
-    <div className='mt-10 '>
+    <div className='mt-10  px-12'>
       <h1 className="text-4xl font-extrabold text-bold text-center">
         Business Summary
       </h1>
