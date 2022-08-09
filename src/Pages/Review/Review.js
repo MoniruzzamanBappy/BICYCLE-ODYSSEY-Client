@@ -13,11 +13,11 @@ const Review = () => {
     return <ReviewLoading />;
   }
   return (
-    <div>
+    <div className="mx-12">
       <h1 className="text-4xl font-extrabold text-bold text-center">
         All Reviews
       </h1>
-      <div className="grid grid-cols-1 mx-12 justify-between gap-16 lg:grid-cols-3 md:grid-cols-2  mt-16">
+      <div className="grid grid-cols-2 justify-around gap-4 lg:grid-cols-4 md:grid-cols-3  my-16">
         {reviews.reverse().map((item) => (
           <ReviewSingle key={item._id} item={item}></ReviewSingle>
         ))}

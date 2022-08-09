@@ -1,9 +1,11 @@
 import React from "react";
 // import Skeleton from "react-loading-skeleton";
 
+// import ReactStars from "react-rating-stars-component";
+
 const Blogs = () => {
   return (
-    <div className="mt-5">
+    <div className="mt-5 mx-12">
       <h1 className="text-4xl font-extrabold text-bold text-center">Blogs</h1>
       <div className="divider"></div>
       <h1 className="text-2xl font-extrabold text-bold">
@@ -86,7 +88,8 @@ const Blogs = () => {
         </li>
         <li>You will lose control of the state across all components.</li>
       </ul>
-      
+
+     
     </div>
   );
 };
