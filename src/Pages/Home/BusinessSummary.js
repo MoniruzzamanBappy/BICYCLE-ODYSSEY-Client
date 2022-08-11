@@ -1,22 +1,21 @@
 import React from "react";
-import auth from './../../firebase.init';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import Loading from './../Shared/Loading/Loading';
+import auth from "./../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "./../Shared/Loading/Loading";
 
 const BusinessSummary = () => {
-    
   const [user, loading] = useAuthState(auth);
   if (loading) {
     return <Loading />;
   }
   return (
-    <div className='mt-10  px-12'>
+    <div className="mt-10  px-12">
       <h1 className="text-4xl font-extrabold text-bold text-center">
         Business Summary
       </h1>
 
       <div className="my-5 w-full stats stats-vertical lg:stats-horizontal shadow">
-        <div className="stat place-items-center">
+        <div className="stat bg-slate-200 place-items-center">
           <div className="stat-figure text-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +36,7 @@ const BusinessSummary = () => {
           <div className="stat-desc">19% more than last year</div>
         </div>
 
-        <div className="stat place-items-center">
+        <div className="stat bg-slate-200 place-items-center">
           <div className="stat-figure text-secondary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -58,16 +57,19 @@ const BusinessSummary = () => {
           <div className="stat-desc">21% more than last month</div>
         </div>
 
-        <div className="stat place-items-center">
+        <div className="stat bg-slate-200 place-items-center">
           <div className="stat-figure text-secondary">
-            <div className="avatar online">
-              <div className="w-16 rounded-full">
-                <img
-                  alt="user"
-                  src={user?.photoURL}
-                />
-              </div>
-            </div>
+            {user?.photoURL ? (
+              <>
+                <div className="avatar online">
+                  <div className="w-16 rounded-full">
+                    <img alt="user" src={user?.photoURL} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <div className="stat-value">86%</div>
           <div className="stat-title">Orders done</div>

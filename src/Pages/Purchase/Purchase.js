@@ -20,7 +20,16 @@ const Purchase = () => {
       res.json()
     )
   );
-  const { register,formState: { errors }, handleSubmit, reset } = useForm();
+  // const { register,formState: { errors }, handleSubmit, reset } = useForm();
+  const {
+    register,
+    formState,
+    reset,
+    formState: { errors },
+    handleSubmit
+  } = useForm({
+    mode: "onChange"
+  });
   const onSubmit = (data) => {
     if (data) {
       const order = { ...data, price: part.price };
@@ -68,6 +77,7 @@ const Purchase = () => {
           <input
             placeholder="Product Name"
             className="input input-bordered  w-full max-w-md"
+            readOnly
             defaultValue={part?.productName}
             {...register("partName", { required: true })}
           />
@@ -80,6 +90,7 @@ const Purchase = () => {
           <input
             className="input input-bordered  w-full max-w-md"
             defaultValue={user?.email}
+            readOnly
             {...register("email", { required: true })}
           />
           <input
@@ -87,25 +98,33 @@ const Purchase = () => {
             className="input input-bordered  w-full max-w-md"
             {...register("address", { required: true })}
           />
+          
+          {errors.address && <p className="text-red-600 font-extrabold">invalid input</p>}
           <input
             placeholder="Phone Number"
+            type="tel"
             className="input input-bordered  w-full max-w-md"
-            {...register("number", { required: true })}
+            {...register("number", { required: true, minLength: 6,
+              maxLength: 15, })}
           />
+          
+          {errors.number && <p className="text-red-600 font-extrabold">invalid input</p>}
           <input
             placeholder="Order Quantity"
             defaultValue={part?.order}
             className="input input-bordered  w-full max-w-md"
             type="number"
             {...register("orderQuantity", {
+              required: true,
               min: part?.order,
               max: part?.quantity,
             })}
           />
-          {errors.orderQuantity && "Invalid Quantity"}
+          {errors.orderQuantity && <p className="text-red-600 font-extrabold"> {errors.orderQuantity?.message} Invalid Input</p>}
           <input
             className="btn w-full max-w-md btn-accent"
             value="Add to Cart"
+            disabled={!formState.isValid}
             type="submit"
           />
         </form>

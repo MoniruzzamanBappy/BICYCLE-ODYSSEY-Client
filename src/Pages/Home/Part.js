@@ -14,11 +14,11 @@ const Part = ({ item }) => {
     <>
       {item ? (
         <>
-          <div class="post">
+          <div className="post">
             <figure>
-              <img src={img} alt="" class="post-img " />
+              <img src={img} alt="" className="post-img " />
             </figure>
-            <div class="post-content">
+            <div className="post-content">
               <h1 className="text-2xl font-extrabold text-bold">
                 {productName}
               </h1>
@@ -30,7 +30,7 @@ const Part = ({ item }) => {
               </p>
               <p>Available: {quantity}</p>
               <p>Price: {price} tk</p>
-              <span class="date">Min Order: {order}</span>
+              <span className="date">Min Order: {order}</span>
               <div className="card-actions justify-end">
                 <button
                   onClick={() => handleBuyNow(_id)}

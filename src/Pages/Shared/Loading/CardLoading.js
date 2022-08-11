@@ -9,8 +9,8 @@ const CardLoading = () => {
         Parts are loading
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 mt-16">
-        {cardCount.map((item) => (
-          <div className="card w-96 bg-base-100 shadow-xl">
+        {cardCount.map((item, index) => (
+          <div key={index} className="card w-96 bg-base-100 shadow-xl">
             <section className="flex justify-center mt-4">
               <Skeleton height={200} width={342} />
             </section>
